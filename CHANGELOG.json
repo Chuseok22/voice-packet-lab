@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "lastUpdated": "2026-09-26T10:53:25Z",
+    "currentVersion": "0.0.2",
+    "projectTypes": [
+      "basic"
+    ],
+    "totalReleases": 1
+  },
+  "releases": [
+    {
+      "version": "0.0.2",
+      "project_types": [
+        "basic"
+      ],
+      "date": "2026-09-26",
+      "pr_number": null,
+      "raw_summary": "## [0.0.2]\n\n### 🔧 변경사항\n- initialize repository with project workflows and gitignore",
+      "parsed_changes": {
+        "변경사항": {
+          "title": "🔧 변경사항",
+          "items": [
+            "initialize repository with project workflows and gitignore"
+          ]
+        }
+      },
+      "parse_method": "markdown"
+    }
+  ]
+}
