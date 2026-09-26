@@ -1,0 +1,19 @@
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import './styles/tokens.css';
+import './styles/global.css';
+import { App } from './app/App';
+
+const container = document.getElementById('root');
+if (!container) {
+  throw new Error('#root 요소를 찾을 수 없습니다.');
+}
+
+createRoot(container).render(
+  <StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StrictMode>,
+);
