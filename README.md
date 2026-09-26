@@ -83,3 +83,10 @@ pnpm e2e          # 빌드 후 서버를 띄워 E2E, 반응형, 접근성 검사
 
 - Discord Developer Docs — Voice Connections: https://docs.discord.com/developers/topics/voice-connections
 - RFC 6455 (WebSocket), RFC 3550 (RTP), RFC 9293 (TCP), RFC 8446 (TLS 1.3)
+
+---
+
+<!-- AUTO-VERSION-SECTION: DO NOT EDIT MANUALLY -->
+## 최신 버전 : v0.0.2
+
+[전체 버전 기록 보기](CHANGELOG.md)
