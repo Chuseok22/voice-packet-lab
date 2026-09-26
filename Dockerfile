@@ -10,20 +10,17 @@ COPY shared/package.json shared/
 COPY client/package.json client/
 COPY server/package.json server/
 RUN pnpm install --frozen-lockfile
+# 루트 .env(VITE_PRESENTER_PASSWORD)는 CI가 GitHub Secret으로 만들어 두며, 빌드 단계에서만 쓰인다.
 COPY . .
-ARG VITE_PRESENTER_PASSWORD_SHA256=""
-ENV VITE_PRESENTER_PASSWORD_SHA256=${VITE_PRESENTER_PASSWORD_SHA256}
 RUN pnpm build
 
 FROM node:22-alpine AS runtime
-ENV NODE_ENV=production \
-    PORT=3000 \
-    STATIC_DIR=/app/client/dist
+ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=build /app/server/dist ./server/dist
 COPY --from=build /app/client/dist ./client/dist
 USER node
 EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget -q --spider "http://127.0.0.1:${PORT}/healthz" || exit 1
+  CMD wget -q --spider "http://127.0.0.1:3000/healthz" || exit 1
 CMD ["node", "server/dist/index.cjs"]
