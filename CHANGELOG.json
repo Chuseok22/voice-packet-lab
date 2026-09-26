@@ -1,13 +1,82 @@
 {
   "metadata": {
-    "lastUpdated": "2026-09-26T10:53:25Z",
-    "currentVersion": "0.0.2",
+    "lastUpdated": "2026-09-26T17:31:07Z",
+    "currentVersion": "0.1.0",
     "projectTypes": [
-      "basic"
+      "node"
     ],
-    "totalReleases": 1
+    "totalReleases": 2
   },
   "releases": [
+    {
+      "version": "0.1.0",
+      "project_types": [
+        "node"
+      ],
+      "date": "2026-09-26",
+      "pr_number": null,
+      "raw_summary": "## [0.1.0]\n\n### ✨ 기능\n- Voice_Packet_Lab_웹_실습_앱구축 — add voice gateway mock server\n- Voice_Packet_Lab_웹_실습_앱구축 — add static file server with security headers\n- Voice_Packet_Lab_웹_실습_앱구축 — add shared gateway message types\n- Voice_Packet_Lab_웹_실습_앱구축 — add connection screen\n- Voice_Packet_Lab_웹_실습_앱구축 — add presenter mode\n- Voice_Packet_Lab_웹_실습_앱구축 — add packet lab screen\n- Voice_Packet_Lab_웹_실습_앱구축 — add app shell and design tokens\n- Voice_Packet_Lab_웹_실습_앱구축 — add korean ui content\n- Voice_Packet_Lab_웹_실습_앱구축 — add web audio adapters\n- Voice_Packet_Lab_웹_실습_앱구축 — add packet simulation engine\n\n### 📝 문서\n- update readme for build-time env and cicd workflow\n- add project readme\n\n### ♻️ 리팩토링\n- Voice_Packet_Lab_웹_실습_앱구축 — 서버 포트·연결 상한·정적 경로를 환경변수 대신 코드 고정값으로 변경\n- Voice_Packet_Lab_웹_실습_앱구축 — 발표자 비밀번호를 평문으로 받아 루트 .env에서 읽도록 변경\n\n### ✅ 테스트\n- align e2e config with plain password and fixed port\n- add playwright e2e suite\n- add server test suite\n- add shared gateway type tests\n- add connection screen tests\n- add presenter mode tests\n- add packet lab tests\n- add app layout tests\n- add content tests\n- add audio adapter tests\n- add packet simulation engine tests\n\n### 🔧 변경사항\n- sync version metadata and readme version section\n- add test, docker build and ssh deploy workflow\n- update docker and env example for build-time .env\n- add docker packaging files\n- add connection snapshot capture script\n- add sample audio clip generator\n- set up pnpm workspace configuration",
+      "parsed_changes": {
+        "기능": {
+          "title": "✨ 기능",
+          "items": [
+            "Voice_Packet_Lab_웹_실습_앱구축 — add voice gateway mock server",
+            "Voice_Packet_Lab_웹_실습_앱구축 — add static file server with security headers",
+            "Voice_Packet_Lab_웹_실습_앱구축 — add shared gateway message types",
+            "Voice_Packet_Lab_웹_실습_앱구축 — add connection screen",
+            "Voice_Packet_Lab_웹_실습_앱구축 — add presenter mode",
+            "Voice_Packet_Lab_웹_실습_앱구축 — add packet lab screen",
+            "Voice_Packet_Lab_웹_실습_앱구축 — add app shell and design tokens",
+            "Voice_Packet_Lab_웹_실습_앱구축 — add korean ui content",
+            "Voice_Packet_Lab_웹_실습_앱구축 — add web audio adapters",
+            "Voice_Packet_Lab_웹_실습_앱구축 — add packet simulation engine"
+          ]
+        },
+        "문서": {
+          "title": "📝 문서",
+          "items": [
+            "update readme for build-time env and cicd workflow",
+            "add project readme"
+          ]
+        },
+        "리팩토링": {
+          "title": "♻️ 리팩토링",
+          "items": [
+            "Voice_Packet_Lab_웹_실습_앱구축 — 서버 포트·연결 상한·정적 경로를 환경변수 대신 코드 고정값으로 변경",
+            "Voice_Packet_Lab_웹_실습_앱구축 — 발표자 비밀번호를 평문으로 받아 루트 .env에서 읽도록 변경"
+          ]
+        },
+        "테스트": {
+          "title": "✅ 테스트",
+          "items": [
+            "align e2e config with plain password and fixed port",
+            "add playwright e2e suite",
+            "add server test suite",
+            "add shared gateway type tests",
+            "add connection screen tests",
+            "add presenter mode tests",
+            "add packet lab tests",
+            "add app layout tests",
+            "add content tests",
+            "add audio adapter tests",
+            "add packet simulation engine tests"
+          ]
+        },
+        "변경사항": {
+          "title": "🔧 변경사항",
+          "items": [
+            "sync version metadata and readme version section",
+            "add test, docker build and ssh deploy workflow",
+            "update docker and env example for build-time .env",
+            "add docker packaging files",
+            "add connection snapshot capture script",
+            "add sample audio clip generator",
+            "set up pnpm workspace configuration"
+          ]
+        }
+      },
+      "parse_method": "markdown"
+    },
     {
       "version": "0.0.2",
       "project_types": [
