@@ -20,35 +20,33 @@ pnpm dev          # client(5173) + server(3000). /ws 는 Vite가 서버로 프�
 pnpm test         # 전체 단위/통합 테스트
 pnpm typecheck
 pnpm build        # client/dist + server/dist/index.cjs
-PORT=3100 pnpm start
+pnpm start
 ```
 
 ## 환경변수
 
 | 이름 | 시점 | 설명 |
 |---|---|---|
-| `PORT` | 런타임 | 기본 3000 |
-| `ALLOWED_ORIGINS` | 런타임 | 쉼표로 구분한 허용 Origin. 비우면 same-origin만 허용 |
-| `MAX_CONNECTIONS` | 런타임 | 동시 WebSocket 연결 상한, 기본 200 |
-| `STATIC_DIR` | 런타임 | 정적 파일 위치. 기본 `<cwd>/client/dist` |
-| `VITE_PRESENTER_PASSWORD_SHA256` | 빌드 | 발표자 비밀번호의 SHA-256(hex) |
+| `VITE_PRESENTER_PASSWORD` | 빌드 | 발표자 비밀번호(평문). 저장소 루트 `.env`에 둔다 |
 
-발표자 비밀번호 해시: `printf '내비밀번호' | shasum -a 256 | cut -d' ' -f1`
+서버 포트(3000), 동시 연결 상한(200), 정적 파일 위치(`client/dist`)는 코드에 고정되어 있고 환경변수로 바꾸지 않는다. WebSocket은 same-origin만 허용한다.
+
+`.env.example`을 `.env`로 복사해 값을 채운다. `.env`는 git에 올라가지 않으며, 배포에서는 이 파일 내용을 GitHub Secret으로 등록해 CI가 빌드 전에 `.env`로 써 넣는다.
 
 WebSocket의 Origin 검사는 브라우저가 항상 보내는 `Origin`을 대상으로 한다. `Origin`이 없는 요청(curl, 테스트 클라이언트)은 허용한다.
 
 mock 서버는 실제 Discord 음성 게이트웨이처럼 Identify보다 먼저 Heartbeat를 받는다(클라이언트는 Hello 직후 Heartbeat를 보낸다). Identify 전에 그 밖의 opcode를 보내면 4003으로 닫고, 연결 후 10초 안에 Identify를 보내지 않으면 4009로 소켓을 닫는다.
 
-발표자 게이트는 실수 방지용 스위치다. 해시가 번들에 들어가므로 진짜 보안이 아니다(지킬 비밀이 없다: 녹음/업로드는 그 브라우저 메모리에만 남는다).
+발표자 게이트는 실수 방지용 스위치다. 비밀번호가 평문으로 번들에 들어가므로 진짜 보안이 아니다(다른 곳에 쓰는 비밀번호를 쓰지 않는다)(지킬 비밀이 없다: 녹음/업로드는 그 브라우저 메모리에만 남는다).
 
 ## Docker
 
 ```bash
-docker build --build-arg VITE_PRESENTER_PASSWORD_SHA256=<해시> -t voice-packet-lab .
+docker build -t voice-packet-lab .   # 루트 .env를 빌드에 사용한다
 docker run --rm -p 3000:3000 voice-packet-lab
 ```
 
-이미지는 단일 Node 컨테이너이며 `/healthz`로 헬스체크한다. CI/CD와 배포는 이 저장소의 범위 밖이다.
+이미지는 단일 Node 컨테이너이며 `/healthz`로 헬스체크한다. 배포는 `.github/workflows/voice-packet-lab-cicd.yaml`이 담당한다(main push 시 테스트 → DockerHub 이미지 빌드/푸시 → SSH 배포, 호스트 포트 8089). 필요한 GitHub Secrets: `ENV_FILE`(`.env` 전체 내용), `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`, `SERVER_HOST`, `SERVER_USER`, `SERVER_PASSWORD`, `SERVER_PORT`.
 
 ## 리버스 프록시 요구사항
 
@@ -66,12 +64,12 @@ location /ws/ {
 }
 ```
 
-- `Host` 헤더를 보존해야 서버의 same-origin 검사가 통과한다. 다르게 서비스하려면 `ALLOWED_ORIGINS`를 지정한다.
+- `Host` 헤더를 보존해야 서버의 same-origin 검사가 통과한다. (다른 Origin으로 서비스하는 구성은 지원하지 않는다.)
 
 ## 발표 전 준비
 
 1. 기본 음원 교체: `client/public/audio/sample.wav`를 직접 녹음한 48kHz 모노 WAV로 바꾼다(임시본은 `bash scripts/make-sample-audio.sh`, macOS 전용).
-2. 스냅샷 재생성(서버를 띄운 뒤): `node server/scripts/capture-snapshot.mjs ws://127.0.0.1:3100/ws/voice-gateway?v=8`
+2. 스냅샷 재생성(서버를 띄운 뒤): `node server/scripts/capture-snapshot.mjs ws://127.0.0.1:3000/ws/voice-gateway?v=8`
 3. 실기기에서 직접 확인한다: 이어폰으로 정상·손실·지터·버퍼 소리 비교, iOS Safari와 Android Chrome 재생, QR 접속, 프록시 뒤 wss/101 핸드셰이크와 "예시 (서버 미연결)" 폴백, 발표자 녹음. (더 긴 점검표는 git에 올라가지 않는 로컬 `docs/manual-checklist.md`에 있을 수 있다.)
 
 ## 검증
