@@ -1,0 +1,9 @@
+export const FRAME_MS = 20;
+export const SAMPLE_RATE = 48000;
+export const SAMPLES_PER_FRAME = 960;
+export const SAMPLES_PER_MS = SAMPLE_RATE / 1000;
+export const FIRST_SEQUENCE = 101;
+export const SSRC = 3192048;
+export const MAX_CLIP_SECONDS = 10;
+export const LOSS_CHANNEL = 0;
+export const JITTER_CHANNEL = 1;

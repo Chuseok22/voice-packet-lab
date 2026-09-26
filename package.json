@@ -1,0 +1,20 @@
+{
+  "name": "voice-packet-lab",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --parallel --filter client --filter server dev",
+    "build": "pnpm --filter client build && pnpm --filter server build",
+    "start": "node server/dist/index.cjs",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck && tsc --noEmit -p tsconfig.json",
+    "e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.2",
+    "typescript": "^7.0.2"
+  },
+  "packageManager": "pnpm@12.6.0"
+}

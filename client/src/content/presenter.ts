@@ -1,0 +1,31 @@
+export const presenterContent = {
+  gate: {
+    title: '발표자 모드',
+    description: '비밀번호를 입력하면 내 목소리 녹음과 파일 업로드 기능이 열립니다.',
+    label: '비밀번호',
+    submit: '확인',
+    wrong: '비밀번호가 맞지 않습니다.',
+    unavailable: '비밀번호를 확인할 수 없습니다. HTTPS로 접속했는지 확인해 주세요.',
+    notConfigured: '발표자 비밀번호가 설정되지 않았습니다. 빌드 설정(VITE_PRESENTER_PASSWORD)을 확인해 주세요.',
+  },
+  recorder: {
+    title: '내 목소리로 실습하기',
+    hint: '녹음과 파일은 이 브라우저 안에서만 쓰이고 어디에도 전송되지 않습니다. 하울링을 막으려면 이어폰을 사용하세요.',
+    currentSource: (label: string) => `현재 음원: ${label}`,
+    record: '● 녹음 시작',
+    stop: '■ 녹음 끝내기',
+    recording: (maxSeconds: number) => `녹음 중… 최대 ${maxSeconds}초까지 녹음됩니다.`,
+    processing: '음성을 처리하는 중입니다…',
+    upload: '파일 업로드',
+    reset: '기본 음원으로 되돌리기',
+    applied: '음원을 적용했습니다.',
+    truncated: (maxSeconds: number) => `${maxSeconds}초를 넘는 부분은 잘랐습니다. 음원을 적용했습니다.`,
+  },
+  errors: {
+    micUnsupported: '이 브라우저 또는 주소에서는 마이크 녹음을 쓸 수 없습니다. HTTPS로 접속했는지 확인해 주세요.',
+    micDenied: '마이크 사용이 허용되지 않았습니다. 브라우저 주소창의 권한 설정에서 마이크를 허용해 주세요.',
+    micMissing: '사용할 수 있는 마이크를 찾지 못했습니다.',
+    micFailed: '녹음 중 문제가 생겼습니다. 다시 시도해 주세요.',
+    decode: '이 파일은 읽을 수 없습니다. WAV, MP3, M4A 같은 오디오 파일을 선택해 주세요.',
+  },
+} as const;

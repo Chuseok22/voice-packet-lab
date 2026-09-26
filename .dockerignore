@@ -1,0 +1,10 @@
+**/node_modules
+**/dist
+.git
+.superpowers
+docs
+e2e
+coverage
+playwright-report
+test-results
+*.log
