@@ -1,16 +1,9 @@
 import { createApp } from './app';
-import { loadConfig, type ServerConfig } from './config';
+import { createDefaultConfig } from './config';
 import { logError, logInfo } from './logger';
 
 function main(): void {
-  let config: ServerConfig;
-  try {
-    config = loadConfig(process.env, process.cwd());
-  } catch (error) {
-    logError('invalid configuration', { reason: error instanceof Error ? error.message : 'unknown' });
-    process.exit(1);
-  }
-
+  const config = createDefaultConfig(process.cwd());
   const app = createApp(config);
   app.server.listen(config.port, () => {
     logInfo('server listening', { port: config.port, staticDir: config.staticDir });

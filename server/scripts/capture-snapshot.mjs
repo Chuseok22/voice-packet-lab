@@ -1,6 +1,6 @@
 // 실행 중인 서버에 실제로 연결해서 연결 과정 화면의 "서버 미연결" 스냅샷을 다시 만든다.
-// 사용: pnpm build && PORT=3100 pnpm start & 후
-//       node server/scripts/capture-snapshot.mjs ws://127.0.0.1:3100/ws/voice-gateway?v=8
+// 사용: pnpm build && pnpm start & 후
+//       node server/scripts/capture-snapshot.mjs ws://127.0.0.1:3000/ws/voice-gateway?v=8
 import { writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import WebSocket from 'ws';
