@@ -6,7 +6,7 @@ export const presenterContent = {
     submit: '확인',
     wrong: '비밀번호가 맞지 않습니다.',
     unavailable: '비밀번호를 확인할 수 없습니다. HTTPS로 접속했는지 확인해 주세요.',
-    notConfigured: '발표자 비밀번호가 설정되지 않았습니다. 빌드 설정(VITE_PRESENTER_PASSWORD_SHA256)을 확인해 주세요.',
+    notConfigured: '발표자 비밀번호가 설정되지 않았습니다. 빌드 설정(VITE_PRESENTER_PASSWORD)을 확인해 주세요.',
   },
   recorder: {
     title: '내 목소리로 실습하기',
