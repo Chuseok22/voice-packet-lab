@@ -51,6 +51,9 @@ export const packetLabContent = {
     },
   },
   bufferOff: 'OFF',
+  controlsToggle: {
+    show: '슬라이더로 직접 조절하기',
+  },
   play: {
     degraded: '현재 설정으로 듣기',
     original: '정상 음성 듣기',

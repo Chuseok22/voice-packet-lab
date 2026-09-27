@@ -5,6 +5,7 @@ import { DEFAULT_SETTINGS } from '../../engine/settings';
 import { ConditionSliders } from './ConditionSliders';
 import { PlayBar } from './PlayBar';
 import { ScenarioChips } from './ScenarioChips';
+import { SlidersPanel } from './SlidersPanel';
 
 describe('ScenarioChips', () => {
   it('marks the active scenario and reports clicks', async () => {
@@ -60,5 +61,14 @@ describe('PlayBar', () => {
       <PlayBar playing={null} settingsSummary="요약" sourceLabel="기본 음원" error="재생 실패" onToggle={() => undefined} />,
     );
     expect(screen.getByRole('alert')).toHaveTextContent('재생 실패');
+  });
+});
+
+describe('SlidersPanel', () => {
+  it('starts collapsed and reveals the sliders once expanded', () => {
+    render(<SlidersPanel settings={DEFAULT_SETTINGS} onChange={() => undefined} />);
+    expect(screen.getByLabelText('Packet Loss')).not.toBeVisible();
+    fireEvent.click(screen.getByText('슬라이더로 직접 조절하기'));
+    expect(screen.getByLabelText('Packet Loss')).toBeVisible();
   });
 });
