@@ -8,10 +8,9 @@ export function StepGuide() {
           <span className="step-badge" aria-hidden="true">
             {index + 1}
           </span>
-          <div>
-            <strong>{step.title}</strong>
-            <span>{step.description}</span>
-          </div>
+          <span>
+            <strong>{step.title}</strong> · {step.description}
+          </span>
         </li>
       ))}
     </ol>

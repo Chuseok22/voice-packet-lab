@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 import { packetLabContent } from '../../content/packetLab';
 import { ClipProvider, useClip } from './ClipProvider';
-import { ConditionSliders } from './ConditionSliders';
 import { describeSettings } from './format';
 import { MetricsPanel } from './MetricsPanel';
 import { PacketLanes } from './PacketLanes';
@@ -9,6 +8,7 @@ import { PlayBar } from './PlayBar';
 import { RtpDetail } from './RtpDetail';
 import { ScenarioChips } from './ScenarioChips';
 import { SimulationNotice } from './SimulationNotice';
+import { SlidersPanel } from './SlidersPanel';
 import { StepGuide } from './StepGuide';
 import { usePacketLab, type PacketLabModel } from './usePacketLab';
 import { WaveCompare } from './WaveCompare';
@@ -35,20 +35,24 @@ function NumberedCardHeader({ step, title, hint }: { step: number; title: string
   );
 }
 
-function LabControls({ lab, presenterPanel }: { lab: PacketLabModel } & PacketLabPageProps) {
+function ScenarioCard({ lab }: { lab: PacketLabModel }) {
   const { cards } = packetLabContent;
   return (
-    <div className="lab-controls">
-      <section className="card">
-        <NumberedCardHeader step={1} title={cards.scenario} />
-        <ScenarioChips activeId={lab.scenarioId} onChoose={lab.chooseScenario} />
-      </section>
-      <section className="card">
-        <NumberedCardHeader step={2} title={cards.conditions} />
-        <ConditionSliders settings={lab.settings} onChange={lab.updateSettings} />
-      </section>
-      {presenterPanel}
-    </div>
+    <section className="card">
+      <NumberedCardHeader step={1} title={cards.scenario} />
+      <ScenarioChips activeId={lab.scenarioId} onChoose={lab.chooseScenario} />
+    </section>
+  );
+}
+
+function ResultsCard({ lab }: { lab: PacketLabModel }) {
+  const { cards } = packetLabContent;
+  return (
+    <section className="card">
+      <NumberedCardHeader step={2} title={cards.results} />
+      <MetricsPanel metrics={lab.result.metrics} bufferEnabled={lab.settings.bufferMs > 0} />
+      <WaveCompare original={lab.waveforms.original} degraded={lab.waveforms.degraded} />
+    </section>
   );
 }
 
@@ -56,7 +60,7 @@ function LanesCard({ lab }: { lab: PacketLabModel }) {
   const { cards, hints } = packetLabContent;
   return (
     <section className="card lanes-card">
-      <NumberedCardHeader step={4} title={cards.lanes} hint={hints.lanes} />
+      <NumberedCardHeader step={3} title={cards.lanes} hint={hints.lanes} />
       <PacketLanes
         packets={lab.result.packets}
         nominalDelayMs={lab.settings.delayMs}
@@ -71,7 +75,6 @@ function LanesCard({ lab }: { lab: PacketLabModel }) {
 
 function PacketLabWorkspace({ frames, sourceLabel, presenterPanel }: WorkspaceProps) {
   const lab = usePacketLab(frames);
-  const { cards } = packetLabContent;
 
   return (
     <div className="lab">
@@ -84,17 +87,15 @@ function PacketLabWorkspace({ frames, sourceLabel, presenterPanel }: WorkspacePr
         <StepGuide />
       </div>
 
-      <LabControls lab={lab} presenterPanel={presenterPanel} />
+      <div className="lab-controls">
+        <ScenarioCard lab={lab} />
+        <ResultsCard lab={lab} />
+        <SlidersPanel settings={lab.settings} onChange={lab.updateSettings} />
+        {presenterPanel}
+      </div>
 
       <div className="lab-results">
         <LanesCard lab={lab} />
-        <section className="card">
-          <div className="card-header">
-            <h2 className="card-title">{cards.compare}</h2>
-          </div>
-          <WaveCompare original={lab.waveforms.original} degraded={lab.waveforms.degraded} />
-          <MetricsPanel metrics={lab.result.metrics} bufferEnabled={lab.settings.bufferMs > 0} />
-        </section>
       </div>
 
       <div className="lab-notice">
