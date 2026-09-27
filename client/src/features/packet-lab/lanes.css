@@ -1,10 +1,12 @@
 .lanes {
   display: grid;
   gap: var(--space-2);
+  min-width: 0;
 }
 
 .lanes-frame {
   position: relative;
+  min-width: 0;
 }
 
 .lane-label {
@@ -30,6 +32,8 @@
 }
 
 .lanes-scroll {
+  width: 100%;
+  min-width: 0;
   overflow-x: auto;
   border-radius: var(--radius-sm);
 }

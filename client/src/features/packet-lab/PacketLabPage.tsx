@@ -55,7 +55,7 @@ function LabControls({ lab, presenterPanel }: { lab: PacketLabModel } & PacketLa
 function LanesCard({ lab }: { lab: PacketLabModel }) {
   const { cards, hints } = packetLabContent;
   return (
-    <section className="card">
+    <section className="card lanes-card">
       <NumberedCardHeader step={4} title={cards.lanes} hint={hints.lanes} />
       <PacketLanes
         packets={lab.result.packets}

@@ -69,6 +69,15 @@ describe('PacketLanes', () => {
     );
     expect(screen.queryAllByRole('button')).toHaveLength(0);
   });
+
+  it('wraps the lane SVG in a horizontally-scrollable, shrinkable container', () => {
+    const { container } = render(
+      <PacketLanes packets={packets} nominalDelayMs={100} selectedSequence={null} onSelect={() => undefined} playheadMs={null} />,
+    );
+    const scroller = container.querySelector('.lanes-scroll');
+    expect(scroller).not.toBeNull();
+    expect(container.querySelector('.lanes-frame')?.contains(scroller)).toBe(true);
+  });
 });
 
 describe('RtpDetail', () => {
