@@ -51,6 +51,10 @@ test.describe('패킷 랩', () => {
     await play.click();
     await expect(page.getByRole('button', { name: /정지/ }).first()).toHaveAttribute('aria-pressed', 'true');
 
+    const slidersToggle = page.getByText('슬라이더로 직접 조절하기');
+    if (await slidersToggle.isVisible()) {
+      await slidersToggle.click();
+    }
     await page.getByLabel('Packet Loss').press('ArrowRight');
     await expect(page.getByRole('button', { name: /현재 설정으로 듣기/ })).toHaveAttribute('aria-pressed', 'false');
 

@@ -176,7 +176,6 @@
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
   font-size: var(--text-sm);
-  overflow-x: auto;
 }
 
 .raw-line {
@@ -188,7 +187,8 @@
   background: transparent;
   font: inherit;
   text-align: left;
-  white-space: pre;
+  white-space: pre-wrap;
+  word-break: break-word;
   cursor: pointer;
 }
 

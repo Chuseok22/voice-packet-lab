@@ -27,6 +27,19 @@ describe('RequestResponsePanel', () => {
     await userEvent.click(screen.getByRole('button', { name: 'HTTP/1.1 101 Switching Protocols' }));
     expect(screen.getByRole('status')).toHaveTextContent('프로토콜을 바꿨다');
   });
+
+  it('keeps a long header value intact in the accessible name instead of truncating it', () => {
+    const longKey = 'Sec-WebSocket-Key: aVeryLongBase64EncodedKeyValueThatWouldOtherwiseOverflow==';
+    render(
+      <RequestResponsePanel
+        handshake={{
+          request: `GET /ws/voice-gateway?v=8 HTTP/1.1\n${longKey}`,
+          response: 'HTTP/1.1 101 Switching Protocols',
+        }}
+      />,
+    );
+    expect(screen.getByRole('button', { name: longKey })).toBeInTheDocument();
+  });
 });
 
 describe('MessageLog', () => {

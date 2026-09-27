@@ -27,7 +27,7 @@ interface WaveCompareProps {
 export function WaveCompare({ original, degraded }: WaveCompareProps) {
   const { wave } = packetLabContent;
   return (
-    <details className="wave" open>
+    <details className="wave">
       <summary>{wave.summary}</summary>
       <p className="wave-label">{wave.original}</p>
       <WaveBars bars={original} showGaps={false} />

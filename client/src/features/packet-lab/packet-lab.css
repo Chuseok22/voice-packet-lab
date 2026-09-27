@@ -4,6 +4,10 @@
   gap: var(--space-3);
 }
 
+.lanes-card {
+  min-width: 0;
+}
+
 .lab-head h1 {
   font-size: var(--text-xl);
   letter-spacing: -0.01em;
@@ -43,13 +47,18 @@
   line-height: 1.35;
 }
 
-.step-guide-item strong,
 .step-guide-item span:not(.step-badge) {
   display: block;
 }
 
 .step-guide-item span:not(.step-badge) {
   color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.step-guide-item strong {
+  color: var(--color-text);
+  font-size: var(--text-sm);
 }
 
 .chips {
@@ -77,6 +86,33 @@
 .sliders {
   display: grid;
   gap: var(--space-4);
+}
+
+.sliders-summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  font-weight: 700;
+  list-style: none;
+}
+
+.sliders-summary::-webkit-details-marker {
+  display: none;
+}
+
+.sliders-body {
+  margin-top: var(--space-3);
+}
+
+.sliders-title {
+  margin-bottom: var(--space-3);
+}
+
+@media (min-width: 900px) {
+  .sliders-summary {
+    display: none;
+  }
 }
 
 .slider-top {
@@ -249,6 +285,7 @@
       'steps steps'
       'controls play'
       'controls results'
+      'sliders .'
       'notice notice';
     column-gap: var(--space-4);
   }
@@ -273,15 +310,15 @@
     grid-area: results;
   }
 
+  .lab-sliders {
+    grid-area: sliders;
+  }
+
   .lab-notice {
     grid-area: notice;
   }
 
   .step-guide {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .metrics {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

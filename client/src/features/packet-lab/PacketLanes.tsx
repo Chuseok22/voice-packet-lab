@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, type KeyboardEvent, type RefObject } from 'react';
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type RefObject } from 'react';
 import { packetLabContent } from '../../content/packetLab';
 import type { SimulatedPacket } from '../../engine/types';
 import {
@@ -27,11 +27,54 @@ function prefersReducedMotion(): boolean {
   return typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-function useLaneScroll(playheadMs: number | null): {
+interface LaneViewport {
+  start: number;
+  size: number;
+}
+
+function useLaneScroll(
+  playheadMs: number | null,
+  layoutWidth: number,
+): {
   scrollerRef: RefObject<HTMLDivElement | null>;
   jumpTo: (ratio: number) => void;
+  viewport: LaneViewport;
 } {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const [viewport, setViewport] = useState<LaneViewport>({ start: 0, size: 1 });
+
+  const readViewport = () => {
+    const scroller = scrollerRef.current;
+    if (!scroller || scroller.scrollWidth <= 0) {
+      setViewport({ start: 0, size: 1 });
+      return;
+    }
+    setViewport({
+      start: scroller.scrollLeft / scroller.scrollWidth,
+      size: scroller.clientWidth / scroller.scrollWidth,
+    });
+  };
+
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller) {
+      return;
+    }
+    scroller.addEventListener('scroll', readViewport, { passive: true });
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', readViewport);
+    }
+    return () => {
+      scroller.removeEventListener('scroll', readViewport);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', readViewport);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    readViewport();
+  }, [layoutWidth]);
 
   useEffect(() => {
     const scroller = scrollerRef.current;
@@ -39,16 +82,18 @@ function useLaneScroll(playheadMs: number | null): {
       return;
     }
     scroller.scrollLeft = Math.max(0, xOf(playheadMs) - scroller.clientWidth / 3);
+    readViewport();
   }, [playheadMs]);
 
   const jumpTo = (ratio: number) => {
     const scroller = scrollerRef.current;
     if (scroller) {
       scroller.scrollLeft = Math.max(0, ratio * scroller.scrollWidth - scroller.clientWidth / 2);
+      readViewport();
     }
   };
 
-  return { scrollerRef, jumpTo };
+  return { scrollerRef, jumpTo, viewport };
 }
 
 function LaneLabels() {
@@ -199,7 +244,7 @@ function Legend() {
 export function PacketLanes({ packets, nominalDelayMs, selectedSequence, onSelect, playheadMs }: PacketLanesProps) {
   const { lanes } = packetLabContent;
   const layout = useMemo(() => buildLaneLayout(packets, nominalDelayMs), [packets, nominalDelayMs]);
-  const { scrollerRef, jumpTo } = useLaneScroll(playheadMs);
+  const { scrollerRef, jumpTo, viewport } = useLaneScroll(playheadMs, layout.width);
 
   return (
     <div className="lanes">
@@ -226,7 +271,7 @@ export function PacketLanes({ packets, nominalDelayMs, selectedSequence, onSelec
         </div>
       </div>
 
-      <PacketOverview packets={packets} onJump={jumpTo} />
+      <PacketOverview packets={packets} onJump={jumpTo} viewportStart={viewport.start} viewportSize={viewport.size} />
       <Legend />
     </div>
   );

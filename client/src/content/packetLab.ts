@@ -12,16 +12,16 @@ export const packetLabContent = {
   tagline: '네트워크 상태를 바꾸며, 같은 음성이 어떻게 달라지는지 직접 확인해 보세요',
   steps: [
     { title: '시나리오 선택', description: '버튼 하나로 대표 상황 적용' },
-    { title: '슬라이더 조절', description: '손실·지연·지터·버퍼 변경' },
-    { title: '▶ 눌러서 듣기', description: '정상 음성과 번갈아 비교' },
+    { title: '결과 확인', description: '손실·지연 등 지표 확인' },
     { title: '패킷 눌러보기', description: 'RTP 정보를 확인' },
+    { title: '직접 조절하기', description: '슬라이더로 세밀하게 변경' },
   ],
   cards: {
     scenario: '시나리오',
     conditions: '네트워크 조건',
     listen: '들어보기',
     lanes: '패킷은 어떻게 도착했나?',
-    compare: '결과 비교',
+    results: '결과',
   },
   hints: {
     listen: '같은 음성을 두 가지로 비교하세요',
@@ -51,6 +51,9 @@ export const packetLabContent = {
     },
   },
   bufferOff: 'OFF',
+  controlsToggle: {
+    show: '슬라이더로 직접 조절하기',
+  },
   play: {
     degraded: '현재 설정으로 듣기',
     original: '정상 음성 듣기',
