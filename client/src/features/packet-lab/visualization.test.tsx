@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import type { NetworkSettings, SimulatedPacket } from '../../engine/types';
 import { PacketLanes } from './PacketLanes';
+import { PacketOverview } from './PacketOverview';
 import { RtpDetail } from './RtpDetail';
 import { WaveCompare } from './WaveCompare';
 
@@ -109,5 +110,61 @@ describe('WaveCompare', () => {
     expect(container.querySelectorAll('.wave-bars')[0].querySelectorAll('i')).toHaveLength(3);
     expect(container.querySelectorAll('.wave-bars')[1].querySelectorAll('i.gap')).toHaveLength(1);
     expect(container.querySelectorAll('.wave-bars')[0].querySelectorAll('i.gap')).toHaveLength(0);
+  });
+});
+
+describe('PacketOverview', () => {
+  const overviewPackets = [packet(0), packet(1), packet(2)];
+
+  it('draws a viewport rectangle at the given start and size', () => {
+    const { container } = render(
+      <PacketOverview packets={overviewPackets} onJump={() => undefined} viewportStart={0.25} viewportSize={0.5} />,
+    );
+    const viewportRect = container.querySelector('.overview-viewport');
+    expect(viewportRect).not.toBeNull();
+    expect(viewportRect).toHaveAttribute('x', '0.75');
+    expect(viewportRect).toHaveAttribute('width', '1.5');
+  });
+
+  it('clamps a viewport that would run past either edge', () => {
+    const { container } = render(
+      <PacketOverview packets={overviewPackets} onJump={() => undefined} viewportStart={0.75} viewportSize={0.5} />,
+    );
+    const viewportRect = container.querySelector('.overview-viewport');
+    expect(viewportRect).toHaveAttribute('x', '2.25');
+    expect(viewportRect).toHaveAttribute('width', '0.75');
+  });
+
+  it('renders no viewport rectangle when there is nothing to scroll (full-width viewport)', () => {
+    const { container } = render(
+      <PacketOverview packets={overviewPackets} onJump={() => undefined} viewportStart={0} viewportSize={1} />,
+    );
+    expect(container.querySelector('.overview-viewport')).toBeNull();
+  });
+
+  it('calls onJump with the pointer-down ratio and again while dragging', () => {
+    const onJump = vi.fn();
+    const { container } = render(
+      <PacketOverview packets={overviewPackets} onJump={onJump} viewportStart={0} viewportSize={0.5} />,
+    );
+    const svg = container.querySelector('svg.overview') as SVGSVGElement;
+    vi.spyOn(svg, 'getBoundingClientRect').mockReturnValue({
+      left: 0,
+      width: 100,
+      top: 0,
+      height: 8,
+      right: 100,
+      bottom: 8,
+      x: 0,
+      y: 0,
+      toJSON: () => '',
+    } as DOMRect);
+    fireEvent.pointerDown(svg, { clientX: 20 });
+    expect(onJump).toHaveBeenLastCalledWith(0.2);
+    fireEvent.pointerMove(svg, { clientX: 60 });
+    expect(onJump).toHaveBeenLastCalledWith(0.6);
+    fireEvent.pointerUp(svg);
+    fireEvent.pointerMove(svg, { clientX: 90 });
+    expect(onJump).toHaveBeenCalledTimes(2);
   });
 });

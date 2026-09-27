@@ -139,6 +139,7 @@
   height: 12px;
   border-radius: 4px;
   cursor: pointer;
+  touch-action: none;
 }
 
 .overview-cell.on-time {
@@ -151,6 +152,13 @@
 
 .overview-cell.lost {
   fill: var(--color-border);
+}
+
+.overview-viewport {
+  fill: rgba(0, 0, 0, 0.12);
+  stroke: var(--color-text);
+  stroke-width: 0.15;
+  pointer-events: none;
 }
 
 .legend {
