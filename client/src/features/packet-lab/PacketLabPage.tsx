@@ -90,12 +90,15 @@ function PacketLabWorkspace({ frames, sourceLabel, presenterPanel }: WorkspacePr
       <div className="lab-controls">
         <ScenarioCard lab={lab} />
         <ResultsCard lab={lab} />
-        <SlidersPanel settings={lab.settings} onChange={lab.updateSettings} />
         {presenterPanel}
       </div>
 
       <div className="lab-results">
         <LanesCard lab={lab} />
+      </div>
+
+      <div className="lab-sliders">
+        <SlidersPanel settings={lab.settings} onChange={lab.updateSettings} />
       </div>
 
       <div className="lab-notice">

@@ -47,7 +47,6 @@
   line-height: 1.35;
 }
 
-.step-guide-item strong,
 .step-guide-item span:not(.step-badge) {
   display: block;
 }
@@ -286,6 +285,7 @@
       'steps steps'
       'controls play'
       'controls results'
+      'sliders .'
       'notice notice';
     column-gap: var(--space-4);
   }
@@ -310,15 +310,15 @@
     grid-area: results;
   }
 
+  .lab-sliders {
+    grid-area: sliders;
+  }
+
   .lab-notice {
     grid-area: notice;
   }
 
   .step-guide {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .metrics {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
