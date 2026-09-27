@@ -1,7 +1,26 @@
 # Changelog
 
-**현재 버전:** 0.1.0  
-**마지막 업데이트:** 2026-09-26T17:31:07Z  
+**현재 버전:** 0.2.0  
+**마지막 업데이트:** 2026-09-27T11:56:01Z  
+
+---
+
+## [0.2.0] - 2026-09-27
+
+**✨ 기능**
+- add a collapsible sliders panel that stays open on wide screens
+- show and let users drag the current viewport on the packet overview
+
+**🐛 수정**
+- correct mobile card order, e2e slider access, metrics width, step guide line wrap
+- wrap long header values on the connection screen instead of clipping them
+- contain the packet lane scroll area so it stops overflowing the page
+
+**♻️ 리팩토링**
+- reorder packet lab cards and widen the desktop layout
+
+**🔧 변경사항**
+- ignore playwright mcp screenshot scratch folder
 
 ---
 

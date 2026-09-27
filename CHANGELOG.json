@@ -1,13 +1,52 @@
 {
   "metadata": {
-    "lastUpdated": "2026-09-26T17:31:07Z",
-    "currentVersion": "0.1.0",
+    "lastUpdated": "2026-09-27T11:56:01Z",
+    "currentVersion": "0.2.0",
     "projectTypes": [
       "node"
     ],
-    "totalReleases": 2
+    "totalReleases": 3
   },
   "releases": [
+    {
+      "version": "0.2.0",
+      "project_types": [
+        "node"
+      ],
+      "date": "2026-09-27",
+      "pr_number": null,
+      "raw_summary": "## [0.2.0]\n\n### ✨ 기능\n- add a collapsible sliders panel that stays open on wide screens\n- show and let users drag the current viewport on the packet overview\n\n### 🐛 수정\n- correct mobile card order, e2e slider access, metrics width, step guide line wrap\n- wrap long header values on the connection screen instead of clipping them\n- contain the packet lane scroll area so it stops overflowing the page\n\n### ♻️ 리팩토링\n- reorder packet lab cards and widen the desktop layout\n\n### 🔧 변경사항\n- ignore playwright mcp screenshot scratch folder",
+      "parsed_changes": {
+        "기능": {
+          "title": "✨ 기능",
+          "items": [
+            "add a collapsible sliders panel that stays open on wide screens",
+            "show and let users drag the current viewport on the packet overview"
+          ]
+        },
+        "수정": {
+          "title": "🐛 수정",
+          "items": [
+            "correct mobile card order, e2e slider access, metrics width, step guide line wrap",
+            "wrap long header values on the connection screen instead of clipping them",
+            "contain the packet lane scroll area so it stops overflowing the page"
+          ]
+        },
+        "리팩토링": {
+          "title": "♻️ 리팩토링",
+          "items": [
+            "reorder packet lab cards and widen the desktop layout"
+          ]
+        },
+        "변경사항": {
+          "title": "🔧 변경사항",
+          "items": [
+            "ignore playwright mcp screenshot scratch folder"
+          ]
+        }
+      },
+      "parse_method": "markdown"
+    },
     {
       "version": "0.1.0",
       "project_types": [
