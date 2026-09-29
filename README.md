@@ -87,6 +87,6 @@ pnpm e2e          # 빌드 후 서버를 띄워 E2E, 반응형, 접근성 검사
 ---
 
 <!-- AUTO-VERSION-SECTION: DO NOT EDIT MANUALLY -->
-## 최신 버전 : v0.1.0 (2026-09-27)
+## 최신 버전 : v0.2.0 (2026-09-29)
 
 [전체 버전 기록 보기](CHANGELOG.md)
