@@ -1,13 +1,31 @@
 {
   "metadata": {
-    "lastUpdated": "2026-09-27T11:56:01Z",
-    "currentVersion": "0.2.0",
+    "lastUpdated": "2026-09-29T15:26:35Z",
+    "currentVersion": "0.2.1",
     "projectTypes": [
       "node"
     ],
-    "totalReleases": 3
+    "totalReleases": 4
   },
   "releases": [
+    {
+      "version": "0.2.1",
+      "project_types": [
+        "node"
+      ],
+      "date": "2026-09-29",
+      "pr_number": null,
+      "raw_summary": "## [0.2.1]\n\n### 🔧 변경사항\n- content: rebrand site title to 컴퓨터네트워크 2조 - 음성 패킷 실습 (short form on mobile nav)",
+      "parsed_changes": {
+        "변경사항": {
+          "title": "🔧 변경사항",
+          "items": [
+            "content: rebrand site title to 컴퓨터네트워크 2조 - 음성 패킷 실습 (short form on mobile nav)"
+          ]
+        }
+      },
+      "parse_method": "markdown"
+    },
     {
       "version": "0.2.0",
       "project_types": [
