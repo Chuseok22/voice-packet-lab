@@ -8,7 +8,10 @@ export function AppLayout() {
         {commonContent.skipToContent}
       </a>
       <header className="app-header">
-        <span className="app-brand">{commonContent.brand}</span>
+        <span className="app-brand">
+          <span className="app-brand-full">{commonContent.brand}</span>
+          <span className="app-brand-short">{commonContent.brandShort}</span>
+        </span>
         <nav className="app-nav" aria-label={commonContent.nav.label}>
           <NavLink to="/" end>
             {commonContent.nav.packetLab}

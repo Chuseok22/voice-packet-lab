@@ -8,7 +8,7 @@ const scenarioLabels: Record<ScenarioId, string> = {
 };
 
 export const packetLabContent = {
-  title: 'Voice Packet Lab',
+  title: '컴퓨터네트워크 2조 - 음성 패킷 실습',
   tagline: '네트워크 상태를 바꾸며, 같은 음성이 어떻게 달라지는지 직접 확인해 보세요',
   steps: [
     { title: '시나리오 선택', description: '버튼 하나로 대표 상황 적용' },

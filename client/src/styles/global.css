@@ -68,6 +68,24 @@ button {
   letter-spacing: -0.01em;
 }
 
+.app-brand-full {
+  display: none;
+}
+
+.app-brand-short {
+  display: inline;
+}
+
+@media (min-width: 900px) {
+  .app-brand-full {
+    display: inline;
+  }
+
+  .app-brand-short {
+    display: none;
+  }
+}
+
 .app-nav {
   display: flex;
   gap: var(--space-1);

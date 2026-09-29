@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test.describe('패킷 랩', () => {
   test('첫 화면에 사용 순서와 패킷 손실 프리셋이 보인다', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByRole('heading', { level: 1, name: 'Voice Packet Lab' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: '컴퓨터네트워크 2조 - 음성 패킷 실습' })).toBeVisible();
     await expect(page.getByRole('button', { name: '패킷 손실', exact: true })).toHaveAttribute('aria-pressed', 'true');
     await expect(page.getByRole('button', { name: /^패킷 \d+번, 손실$/ }).first()).toBeVisible();
     await expect(page.getByText(/실제 Discord 음성 패킷을 송수신하지 않으며/)).toBeVisible();
@@ -11,7 +11,7 @@ test.describe('패킷 랩', () => {
 
   test('시나리오를 바꾸면 지표와 URL이 바뀐다', async ({ page }) => {
     await page.goto('/');
-    await page.getByRole('heading', { level: 1, name: 'Voice Packet Lab' }).waitFor();
+    await page.getByRole('heading', { level: 1, name: '컴퓨터네트워크 2조 - 음성 패킷 실습' }).waitFor();
 
     await page.getByRole('button', { name: '정상', exact: true }).click();
     await expect(page.locator('.metric', { hasText: 'Packet Loss' })).toContainText('0.0%');
@@ -31,7 +31,7 @@ test.describe('패킷 랩', () => {
 
   test('이상한 URL 값은 안전하게 복구한다', async ({ page }) => {
     await page.goto('/?loss=abc&delay=99999&jitter=-5&buffer=-1&seed=1e10');
-    await expect(page.getByRole('heading', { level: 1, name: 'Voice Packet Lab' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: '컴퓨터네트워크 2조 - 음성 패킷 실습' })).toBeVisible();
     await expect(page.getByLabel('Delay')).toHaveValue('500');
     await expect(page.getByLabel('Jitter Buffer')).toHaveAttribute('aria-valuetext', 'OFF');
   });

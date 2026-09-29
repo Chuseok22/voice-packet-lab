@@ -32,7 +32,7 @@ test.describe('발표자 모드', () => {
 
   test('일반 접속자에게는 발표자 기능이 보이지 않는다', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByRole('heading', { level: 1, name: 'Voice Packet Lab' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: '컴퓨터네트워크 2조 - 음성 패킷 실습' })).toBeVisible();
     await expect(page.getByText('내 목소리로 실습하기')).toHaveCount(0);
     await expect(page.getByRole('link', { name: /발표자/ })).toHaveCount(0);
   });

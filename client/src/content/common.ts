@@ -1,5 +1,6 @@
 export const commonContent = {
-  brand: 'Voice Packet Lab',
+  brand: '컴퓨터네트워크 2조 - 음성 패킷 실습',
+  brandShort: '음성 패킷 실습',
   skipToContent: '본문으로 건너뛰기',
   nav: {
     label: '주요 메뉴',

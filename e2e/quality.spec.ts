@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 
 const WIDTHS = [320, 768, 1024, 1440];
 const ROUTES = [
-  { path: '/', ready: 'Voice Packet Lab', name: 'lab' },
+  { path: '/', ready: '컴퓨터네트워크 2조 - 음성 패킷 실습', name: 'lab' },
   { path: '/connect', ready: '연결 과정', name: 'connect' },
 ];
 
