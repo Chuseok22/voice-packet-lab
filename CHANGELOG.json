@@ -1,13 +1,31 @@
 {
   "metadata": {
-    "lastUpdated": "2026-09-29T15:26:35Z",
-    "currentVersion": "0.2.1",
+    "lastUpdated": "2026-09-30T03:06:57Z",
+    "currentVersion": "0.2.2",
     "projectTypes": [
       "node"
     ],
-    "totalReleases": 4
+    "totalReleases": 5
   },
   "releases": [
+    {
+      "version": "0.2.2",
+      "project_types": [
+        "node"
+      ],
+      "date": "2026-09-30",
+      "pr_number": null,
+      "raw_summary": "## [0.2.2]\n\n### 🔧 변경사항\n- disable connection page for demo (remove nav link and /connect route)",
+      "parsed_changes": {
+        "변경사항": {
+          "title": "🔧 변경사항",
+          "items": [
+            "disable connection page for demo (remove nav link and /connect route)"
+          ]
+        }
+      },
+      "parse_method": "markdown"
+    },
     {
       "version": "0.2.1",
       "project_types": [

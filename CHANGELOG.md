@@ -1,7 +1,14 @@
 # Changelog
 
-**현재 버전:** 0.2.1  
-**마지막 업데이트:** 2026-09-29T15:26:35Z  
+**현재 버전:** 0.2.2  
+**마지막 업데이트:** 2026-09-30T03:06:57Z  
+
+---
+
+## [0.2.2] - 2026-09-30
+
+**🔧 변경사항**
+- disable connection page for demo (remove nav link and /connect route)
 
 ---
 
