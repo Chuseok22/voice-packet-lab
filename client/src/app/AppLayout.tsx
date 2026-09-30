@@ -16,7 +16,6 @@ export function AppLayout() {
           <NavLink to="/" end>
             {commonContent.nav.packetLab}
           </NavLink>
-          <NavLink to="/connect">{commonContent.nav.connection}</NavLink>
         </nav>
       </header>
       <main id="main" tabIndex={-1} className="app-main">
